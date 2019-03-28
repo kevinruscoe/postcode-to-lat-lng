@@ -1,0 +1,18 @@
+{
+    "name": "kevinruscoe/postcode-to-lat-lng",
+    "description": "Convert a postcode to lat/lng.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Ruscoe",
+            "email": "hello@kevinruscoe.me",
+            "homepage": "https://github.com/kevinruscoe",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KevinRuscoe\\PostcodeToLatLng\\": "src"
+        }
+    }
+}
