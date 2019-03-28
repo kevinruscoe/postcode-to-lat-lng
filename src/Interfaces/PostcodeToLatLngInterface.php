@@ -1,6 +1,6 @@
 <?php
 
-namespace KevinRuscoe\PostcodeToLatLng\Interface;
+namespace KevinRuscoe\PostcodeToLatLng\Interfaces;
 
 interface PostcodeToLatLngInterface
 {
@@ -11,5 +11,5 @@ interface PostcodeToLatLngInterface
      * @throws \Exception
      * @return array
      */
-    public function search($query);
+    public static function search(string $query);
 }

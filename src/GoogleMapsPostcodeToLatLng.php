@@ -2,7 +2,7 @@
 
 namespace KevinRuscoe\PostcodeToLatLng;
 
-use KevinRuscoe\PostcodeToLatLng\Interface\PostcodeToLatLngInterface;
+use KevinRuscoe\PostcodeToLatLng\Interfaces\PostcodeToLatLngInterface;
 
 class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
 {
@@ -33,10 +33,10 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
      * @throws \Exception
      * @return array
      */
-    public function search(string $query)
+    public static function search(string $query)
     {
         if (! PostcodeValidator::validate($query)) {
-            throw new Exception(sprintf("%s is not a valid UK postcode.", $query));
+            throw new \Exception(sprintf("%s is not a valid UK postcode.", $query));
         }
 
         $postcode = $query;
@@ -71,13 +71,13 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
         curl_close($handle);
 
         if ($httpStatus !== 200) {
-            throw new Exception('Failed to fetch postcode.');
+            throw new \Exception('Failed to fetch postcode.');
         }
 
         $response = json_decode($response);
 
         if (empty($response)) {
-            throw new Exception('Failed to fetch postcode.');
+            throw new \Exception('Failed to fetch postcode.');
         }
 
         return [

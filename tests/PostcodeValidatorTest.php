@@ -1,8 +1,9 @@
 <?php
 
-namespace KevinRuscoe\PostcodeToLatLng;
+namespace KevinRuscoe\PostcodeToLatLng\Test;
 
 use PHPUnit\Framework\TestCase;
+use KevinRuscoe\PostcodeToLatLng\PostcodeValidator;
 
 class PostcodeValidatorTest extends TestCase
 {
