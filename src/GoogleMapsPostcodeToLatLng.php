@@ -6,10 +6,15 @@ use KevinRuscoe\PostcodeToLatLng\Interface\PostcodeToLatLngInterface;
 
 class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
 {
+    /**
+     * The API key.
+     *
+     * @var null|string
+     */
     private $apiKey = null;
 
     /**
-     * Set's the Google API Key.
+     * Set's the Google API key.
      *
      * @param string
      * @return GoogleMapsPostcodeToLatLng

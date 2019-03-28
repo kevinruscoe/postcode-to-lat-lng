@@ -35,11 +35,17 @@ class OpenStreetMapPostcodeToLatLng implements PostcodeToLatLngInterface
 
         $postcode = OpenStreetMapPostcodeToLatLng::cleanUpPostcode($query);
 
-        $url = sprintf("%s?%s", 'https://nominatim.openstreetmap.org/', http_build_query([
+        $params = [
             'format' => 'json',
             'q' => $postcode,
             'limit' => 1
-        ]));
+        ];
+
+        $url = sprintf(
+            "%s?%s",
+            'https://nominatim.openstreetmap.org/',
+            http_build_query($params)
+        );
 
         $handle = curl_init();
 
