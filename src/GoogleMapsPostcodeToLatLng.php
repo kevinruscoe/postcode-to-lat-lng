@@ -88,6 +88,10 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
             throw new \Exception($response->error_message);
         }
 
+        if (count($response->results) < 1) {
+            throw new \Exception('Failed to fetch postcode.');
+        }
+
         return [
             'latitude' => $response->results[0]->geometry->location->lat,
             'longitude' => $response->results[0]->geometry->location->lng
