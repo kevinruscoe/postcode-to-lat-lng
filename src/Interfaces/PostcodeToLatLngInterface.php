@@ -11,5 +11,5 @@ interface PostcodeToLatLngInterface
      * @throws \Exception
      * @return array
      */
-    public static function search(string $query);
+    public function search(string $query);
 }

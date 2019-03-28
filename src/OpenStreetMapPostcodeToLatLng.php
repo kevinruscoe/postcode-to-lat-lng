@@ -28,7 +28,7 @@ class OpenStreetMapPostcodeToLatLng implements PostcodeToLatLngInterface
      * @throws \Exception
      * @return array
      */
-    public static function search(string $query)
+    public function search(string $query)
     {
         if (! PostcodeValidator::validate($query)) {
             throw new \Exception(sprintf("%s is not a valid UK postcode.", $query));

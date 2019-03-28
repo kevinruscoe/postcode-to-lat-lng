@@ -33,7 +33,7 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
      * @throws \Exception
      * @return array
      */
-    public static function search(string $query)
+    public function search(string $query)
     {
         if (! PostcodeValidator::validate($query)) {
             throw new \Exception(sprintf("%s is not a valid UK postcode.", $query));
@@ -47,6 +47,8 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
             'components' => 'country:UK'
         ];
 
+        var_dump($this->apiKey);
+
         if ($this->apiKey) {
             $params['key'] = $this->apiKey;
         }
@@ -59,14 +61,16 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
 
         $handle = curl_init();
 
+        var_dump($url);
+
         curl_setopt_array($handle, [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true
         ]);
 
-        $httpStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
         $response = curl_exec($handle);
+
+        $httpStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
 
         curl_close($handle);
 
@@ -79,10 +83,14 @@ class GoogleMapsPostcodeToLatLng implements PostcodeToLatLngInterface
         if (empty($response)) {
             throw new \Exception('Failed to fetch postcode.');
         }
+        
+        if ($response->error_message) {
+            throw new \Exception($response->error_message);
+        }
 
         return [
-            'latitude' => $response['results'][0]['geometry']['location']['lat'],
-            'longitude' => $response['results'][0]['geometry']['location']['lng']
+            'latitude' => $response->results[0]->geometry->location->lat,
+            'longitude' => $response->results[0]->geometry->location->lng
         ];
     }
 }
