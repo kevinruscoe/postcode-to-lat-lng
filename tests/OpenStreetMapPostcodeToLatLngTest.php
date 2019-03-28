@@ -25,8 +25,6 @@ class OpenStreetMapPostcodeToLatLngTest extends TestCase
                 "longitude" => "-2.96638844396806"
             ]
         );
-
-        //AIzaSyA5b9rwNeVaRHBUMxFCRy6qfFcZL486q5Q
     }   
 
     public function test_it_throws_exception()
