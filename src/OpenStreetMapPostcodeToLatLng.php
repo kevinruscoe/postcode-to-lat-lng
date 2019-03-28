@@ -14,6 +14,7 @@ class OpenStreetMapPostcodeToLatLng implements PostcodeToLatLngInterface
      */
     public static function cleanUpPostcode(string $postcode)
     {
+        $postcode = str_replace(" ", "", $postcode);
         $firstPart = substr($postcode, 0, -3);
         $secondPart = str_replace($firstPart, '', $postcode);
 
@@ -51,12 +52,13 @@ class OpenStreetMapPostcodeToLatLng implements PostcodeToLatLngInterface
 
         curl_setopt_array($handle, [
             CURLOPT_URL => $url,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2',
             CURLOPT_RETURNTRANSFER => true
         ]);
 
-        $httpStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
         $response = curl_exec($handle);
+
+        $httpStatus = curl_getinfo($handle, CURLINFO_HTTP_CODE);
 
         curl_close($handle);
 
@@ -71,8 +73,8 @@ class OpenStreetMapPostcodeToLatLng implements PostcodeToLatLngInterface
         }
 
         return [
-            'latitude' => $response[0]['lat'],
-            'longitude' => $response[0]['lon']
+            'latitude' => $response[0]->lat,
+            'longitude' => $response[0]->lon
         ];
     }
 }
